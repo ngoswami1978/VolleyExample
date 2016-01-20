@@ -138,7 +138,7 @@ public class rptMaintainance extends ListActivity {
 
                                 adapter = new SimpleAdapter(
                                         getApplicationContext(), fillMaps,
-                                        R.layout.activity_rptmaintainance_container, from, to);
+                                        R.layout.activity_rptmaintainance_detail_container, from, to);
 
                                 setListAdapter(adapter);
 

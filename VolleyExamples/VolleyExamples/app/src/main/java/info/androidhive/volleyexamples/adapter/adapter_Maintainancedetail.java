@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -50,7 +49,7 @@ public class adapter_Maintainancedetail extends BaseAdapter implements View.OnCl
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.activity_rptmaintainance_detail_view, null);
+            convertView = layoutInflater.inflate(R.layout.activity_rptmaintainance_detail_row_view, null);
             holder = new ViewHolder();
 
             holder.Dtl_id = (TextView) convertView.findViewById(R.id.mta_dtl_id);

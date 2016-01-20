@@ -89,12 +89,12 @@ public class CustomDialog extends Dialog{
         try
         {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.activity_rptmaintainance_container);
+            setContentView(R.layout.activity_rptmaintainance_detail_container);
             setCancelable(false);
             setCanceledOnTouchOutside(true);
 
 //        LayoutInflater inflater = mContext.getLayoutInflater();
-//        layout = inflater.inflate(R.layout.activity_rptmaintainance_container, null);
+//        layout = inflater.inflate(R.layout.activity_rptmaintainance_detail_container, null);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        setContentView(layout);
 //        setCancelable(false);
@@ -110,7 +110,7 @@ public class CustomDialog extends Dialog{
             listView= ( ListView ) findViewById( R.id.detail_list );  // List defined in XML ( See Below )
 
             LayoutInflater inflater = getLayoutInflater();
-            View rptheader = inflater.inflate(R.layout.activity_rptmaintainance_header_view, listView, false);
+            View rptheader = inflater.inflate(R.layout.activity_rptmaintainance_detail_header_view, listView, false);
             listView.addHeaderView(rptheader, null, false);
 
 
@@ -303,7 +303,7 @@ public class CustomDialog extends Dialog{
 //                                    int[] to = { R.id.mta_SrNo, R.id.mta_FlatNo,R.id.mta_FlatType,R.id.mta_FlatOwnerName,R.id.mta_FlatOwnerContact,R.id.mta_FlatOwnerContact,R.id.mta_FlatRenterName,R.id.mta_FlatRenterContact,R.id.mta_AmtPaid,R.id.mta_dtl_id};
 //                                    adapter = new SimpleAdapter(
 //                                            mContext, fillMaps,
-//                                            R.layout.activity_rptmaintainance_container, from, to);
+//                                            R.layout.activity_rptmaintainance_detail_container, from, to);
 //                                    setListAdapter(adapter);
 
                                     PD.dismiss();
