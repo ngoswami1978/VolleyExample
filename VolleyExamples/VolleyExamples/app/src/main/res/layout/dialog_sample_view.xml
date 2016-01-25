@@ -19,27 +19,47 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/black"
+            android:background="@color/red"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/btnSampleTitle"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="30dp"
                 android:background="@drawable/header"
-                android:text="Test TITLE"
+                android:textSize="12sp"
+                android:text="To generate/regenerate monthly report please press generate report button"
                 android:textColor="@android:color/black"/>
 
+            <TextView
+                android:id="@+id/tv_rptIcon"
+                android:layout_width="250dp"
+                android:layout_height="32dp"
+                android:background="@drawable/header"
+                android:drawableLeft="@drawable/monthlyreport_book"
+                android:textSize="12sp"
+                android:textColor="@color/red"
+                android:text="Icon shows when report is ready"
+                android:layout_gravity="left|center"
+                android:gravity="left|center"/>
+
             <Button
-                android:id="@+id/btnSample"
+                android:id="@+id/btnGeneraterpt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Show Toast"/>
+                android:textColor="@color/red"
+                android:layout_marginLeft="-50dp"
+                android:text="Generate report"/>
+            <Button
+                android:id="@+id/btnshowrpt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-49dp"
+                android:layout_marginRight="-65dp"
+                android:textColor="@color/red"
+                android:text="Show"/>
+
         </LinearLayout>
-
     </LinearLayout>
-
-
 </LinearLayout>

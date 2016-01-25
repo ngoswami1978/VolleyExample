@@ -4,6 +4,7 @@ package info.androidhive.volleyexamples.QuickActionDialogFragment;
  * Created by Admin on 07/01/2016.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,13 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
     private CustomDialog dialog ;
     private String fareRules;
+    private String strMonth;
+    private String strYear;
+    private static Activity myContext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quickactiondialogactivity_main);
 
-        dialog  = new CustomDialog(this);
+//      dialog  = new CustomDialog(this);
+        mContext=this;
+        myContext=MainActivity.this;
 
         final View buttonShow = findViewById(R.id.btnShow);
         final View buttonShow1 = findViewById(R.id.btnNavigation);
@@ -41,10 +48,18 @@ public class MainActivity extends AppCompatActivity {
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mySampleDialogFragment = new MySampleDialogFragment();
+                strMonth="1";
+                strYear="2016";
+
+                mySampleDialogFragment=  MySampleDialogFragment.newInstance(strMonth,strYear,myContext);
                 mySampleDialogFragment.setAnchorView(buttonShow);
                 mySampleDialogFragment.setAligmentFlags(AlignmentFlag.ALIGN_ANCHOR_VIEW_LEFT | AlignmentFlag.ALIGN_ANCHOR_VIEW_BOTTOM);
                 mySampleDialogFragment.show(getSupportFragmentManager(), null);
+
+//                mySampleDialogFragment = new MySampleDialogFragment(strMonth,strYear);
+//                mySampleDialogFragment.setAnchorView(buttonShow);
+//                mySampleDialogFragment.setAligmentFlags(AlignmentFlag.ALIGN_ANCHOR_VIEW_LEFT | AlignmentFlag.ALIGN_ANCHOR_VIEW_BOTTOM);
+//                mySampleDialogFragment.show(getSupportFragmentManager(), null);
 
             }
         });
@@ -52,19 +67,32 @@ public class MainActivity extends AppCompatActivity {
         buttonShow1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mySampleDialogFragment = new MySampleDialogFragment();
+                strMonth="9";
+                strYear="2015";
+
+                mySampleDialogFragment=  MySampleDialogFragment.newInstance(strMonth,strYear,myContext);
+//              mySampleDialogFragment = new MySampleDialogFragment(strMonth,strYear);
                 mySampleDialogFragment.setAnchorView(buttonShow1);
                 mySampleDialogFragment.setAligmentFlags(AlignmentFlag.ALIGN_ANCHOR_VIEW_LEFT | AlignmentFlag.ALIGN_ANCHOR_VIEW_BOTTOM);
                 mySampleDialogFragment.show(getSupportFragmentManager(), null);
+
             }
         });
 
         buttonShow2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                dialog.showDialogWithMsg("New Information from Main");
-                dialog.show();
+                strMonth="10";
+                strYear="2015";
+
+                mySampleDialogFragment=  MySampleDialogFragment.newInstance(strMonth,strYear,myContext);
+                mySampleDialogFragment.setAnchorView(buttonShow2);
+                mySampleDialogFragment.setAligmentFlags(AlignmentFlag.ALIGN_ANCHOR_VIEW_LEFT | AlignmentFlag.ALIGN_ANCHOR_VIEW_BOTTOM);
+                mySampleDialogFragment.show(getSupportFragmentManager(), null);
+
+//              dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+////            dialog.showDialogWithMsg("New Information from Main");
+//              dialog.show();
             }
         });
     }
@@ -83,6 +111,35 @@ public class MainActivity extends AppCompatActivity {
 
     public static class MySampleDialogFragment extends QuickActionDialogFragment {
 
+        private static int intMonth;
+        private static int intYear;
+        private static Activity myContext;
+        CustomDialog dialog;
+
+        public MySampleDialogFragment(){
+            super();
+        }
+
+        static MySampleDialogFragment newInstance(String mnth,String year,Activity mContext ) {
+            MySampleDialogFragment f = new MySampleDialogFragment();
+
+            try
+            {
+                Bundle args = new Bundle();
+                intMonth = Integer.parseInt(mnth);
+                intYear = Integer.parseInt(year);
+                myContext=mContext;
+                args.putInt("month", intMonth);
+                args.putInt("year", intYear);
+                f.setArguments(args);
+            }
+            catch(Exception Ex)
+            {
+                Toast.makeText(myContext, Ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            return f;
+        }
+
         @Override
         protected int getArrowImageViewId() {
             return R.id.ivArrow;
@@ -99,10 +156,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-
         @Override
         protected boolean isCanceledOnTouchOutside() {
             return true;
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            intMonth = getArguments() != null ? getArguments().getInt("month") : 1;
+            intYear = getArguments() != null ? getArguments().getInt("year") : 2015;
         }
 
         @Override
@@ -111,18 +174,42 @@ public class MainActivity extends AppCompatActivity {
 
             TextView myAwesomeTextView = (TextView)view.findViewById(R.id.btnSampleTitle);
             //in your OnCreate() method
-            myAwesomeTextView.setText("My Awesome Text");
+            myAwesomeTextView.setText("To generate/regenerate monthly report please press generate button");
 
-            view.findViewById(R.id.btnSample).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.btnGeneraterpt).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "Button inside Dialog!!", Toast.LENGTH_SHORT).show();
+                    try {
+                        Toast.makeText(getContext(), "Button inside Dialog!! - " + String.valueOf(intMonth) + " - " + String.valueOf(intYear), Toast.LENGTH_SHORT).show();
+                        dialog = new CustomDialog(myContext, String.valueOf(intMonth), String.valueOf(intYear));
 
+//                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                        dialog.show();
+                    } catch (Exception Ex) {
+                        Toast.makeText(getContext(), Ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
+
+            view.findViewById(R.id.btnshowrpt).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+//                        Toast.makeText(getContext(), "Button inside Dialog!! - " + String.valueOf(intMonth) + " - " + String.valueOf(intYear), Toast.LENGTH_SHORT).show();
+//                        dialog = new CustomDialog(myContext, String.valueOf(intMonth), String.valueOf(intYear));
+
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        dialog.show();
+                    }
+                    catch (Exception Ex)
+                    {
+                        Toast.makeText(getContext(), Ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
 
             return view;
         }
     }
-
 }

@@ -33,8 +33,6 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/ic_cancel"
-        android:backgroundTint="@color/red"
         app:layout_anchor="@id/viewA"
         app:layout_anchorGravity="bottom|right|end"/>
-
 </android.support.design.widget.CoordinatorLayout>

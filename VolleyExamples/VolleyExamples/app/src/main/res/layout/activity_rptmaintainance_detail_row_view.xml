@@ -146,9 +146,6 @@
 
 
 
-
-
-
         <TextView
             android:id="@+id/mta_SrNo"
             android:layout_width="wrap_content"
@@ -266,6 +263,18 @@
             android:visibility="invisible"
             android:layout_alignRight="@+id/header_dtl_id"
             android:layout_alignEnd="@+id/header_dtl_id"/>
+
+        <TextView
+            android:id="@+id/mta_paiddatetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_FlatRenter"
+            android:textColor="@color/reportrowcolor"
+            android:text="Paid Date"
+            android:textStyle="bold"
+            android:textSize="@dimen/report_item_row_size"
+            android:layout_alignRight="@+id/mta_AmtPaid"
+            android:layout_alignEnd="@+id/mta_AmtPaid"/>
 
         <!--<View-->
             <!--android:layout_width="match_parent"-->

@@ -14,15 +14,15 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/MonthYear_Id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:textColor="@color/reportheadercolor"
             android:textSize="@dimen/feed_item_timestamp"
-            android:paddingLeft="10sp"
+            android:gravity="center"
             android:textStyle="bold"
-            android:text="PERIOD SEP 2015"/>
+            android:text="@string/reportheader"/>
 
         <WebView
             android:id="@+id/webView"
@@ -45,7 +45,7 @@
                 android:text="SEP-2015"
                 android:padding="@dimen/ten_dp"
                 android:textColor="@color/red"
-                android:alpha="0.28"
+                android:alpha="0.10"
                 android:background="@drawable/cw_reports"
                 android:textSize="@dimen/normal_font_size"/>
 
@@ -58,6 +58,8 @@
             android:divider="@color/list_divider"
             android:dividerHeight="1sp"
             android:listSelector="@drawable/list_row_selector"/>
+
+
     </RelativeLayout>
 
     <ImageView
@@ -65,9 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        android:padding="-1dp"
+        android:padding="1dp"
         android:background="@null"
-        android:src="@mipmap/ic_close" />
+        android:src="@mipmap/ic_cancel" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

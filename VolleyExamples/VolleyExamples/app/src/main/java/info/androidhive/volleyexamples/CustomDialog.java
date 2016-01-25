@@ -19,10 +19,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import info.androidhive.volleyexamples.adapter.adapter_Maintainancedetail;
 import info.androidhive.volleyexamples.model.modelMaintainancedetail;
@@ -49,33 +52,25 @@ public class CustomDialog extends Dialog{
     private adapter_Maintainancedetail objMaintainanceAdapter;
     private ListView listView;
     private ArrayList<modelMaintainancedetail> objModelMaintainancedetail = new ArrayList<modelMaintainancedetail>();
+    private int intMonth;
+    private int intYear;
 
     List<HashMap<String, String>> fillMaps;
 
+    // create hash map
+    HashMap<String, String> hashmapmaintaincneInput = new HashMap<String, String>();
+
 //    View layout;
-
-    // JSON Node names
-    public static final String ITEM_SRNO="Srno";
-    public static final String ITEM_FLT_ID="flt_id";
-    public static final String ITEM_FLATNO="flt_no";
-    public static final String ITEM_FLATTYPE="flt_type";
-    public static final String ITEM_FLATOWNERID= "Owner_id";
-    public static final String ITEM_FLATOWNERNAME="Owner_name";
-    public static final String ITEM_FLATOWNERCONTACT="Owner_contact";
-    public static final String ITEM_FLATOWNEREMAIL="email";
-    public static final String ITEM_FLATRENTERNAME="Renter_name";
-    public static final String ITEM_FLATRENTERCONTACT="Renter_contact";
-    public static final String ITEM_PAIDMONTH="PaidMonth";
-    public static final String ITEM_PAIDYEAR="PaidYear";
-    public static final String ITEM_AMTPAID="PaidAmount";
-    public static final String ITEM_DTL_ID="dtl_id";
-    public static final String ITEM_ENTRYDATE="PaidEntrydt";
-    public static final String ITEM_PAIDBY="Paidby";
-    /**************************/
-
     public CustomDialog(Activity context) {
         super(context);
+    }
+
+    public CustomDialog(Activity context, String strMonth,String strYear) {
+        super(context);
         mContext = context;
+        //Fill hash map for month and year
+        hashmapmaintaincneInput.put("MONTH", strMonth);
+        hashmapmaintaincneInput.put("YEAR", strYear);
         init();
     }
 
@@ -109,15 +104,16 @@ public class CustomDialog extends Dialog{
             mCancelButton = (ImageView) findViewById(R.id.cancelBtn);
             listView= ( ListView ) findViewById( R.id.detail_list );  // List defined in XML ( See Below )
 
+            //Add Header into maintainance Row (ListView)
             LayoutInflater inflater = getLayoutInflater();
             View rptheader = inflater.inflate(R.layout.activity_rptmaintainance_detail_header_view, listView, false);
             listView.addHeaderView(rptheader, null, false);
 
-
             objMaintainanceAdapter = new adapter_Maintainancedetail(mContext, objModelMaintainancedetail);
             listView.setAdapter(objMaintainanceAdapter);
 
-            mMaintainanceReportTextView.setText("Welcome Custome Dialog");
+//            mMaintainanceReportTextView.setText("Welcome Custome Dialog");
+            mMaintainanceReportTextView.setText("");
 
             mCancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,7 +123,7 @@ public class CustomDialog extends Dialog{
             });
 
             rptMaintainance objMain = new rptMaintainance(mContext);
-            objMain.ReadDataFromDB(objModelMaintainancedetail);
+            objMain.ReadDataFromDB(objModelMaintainancedetail,hashmapmaintaincneInput);
 
             WindowManager manager = (WindowManager) mContext.getSystemService(Activity.WINDOW_SERVICE);
             int width, height;
@@ -251,7 +247,93 @@ public class CustomDialog extends Dialog{
             PD.setCancelable(false);
         }
 
-        private void ReadDataFromDB(final ArrayList<modelMaintainancedetail> objModelMaintainancedetail ) {
+        private void ReadDataFromDB(final ArrayList<modelMaintainancedetail> objModelMaintainancedetail,final HashMap<String, String> hashmapMonthYear ) {
+            try {
+                PD.show();
+
+                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    int success =jsonObject.getInt("success");
+
+                                    if (success == 1) {
+                                        JSONArray ja = jsonObject.getJSONArray("maintainance_detail");
+
+                                        // prepare the list of all records
+                                        fillMaps = new ArrayList<HashMap<String, String>>();
+
+                                        for (int i = 0; i < ja.length(); i++) {
+                                            model_detail = new modelMaintainancedetail();
+
+                                            JSONObject jobj = ja.getJSONObject(i);
+                                            HashMap<String, String> item = new HashMap<String, String>();
+                                            HashMap<String, String> map = new HashMap<String, String>();
+
+                                            map.put(ITEM_SRNO, String.valueOf(i + 1));
+                                            map.put(ITEM_FLATNO,jobj.getString(ITEM_FLATNO));
+                                            map.put(ITEM_FLATTYPE,jobj.getString(ITEM_FLATTYPE));
+                                            map.put(ITEM_FLATOWNERNAME,jobj.isNull(ITEM_FLATOWNERNAME) ? "" : jobj.getString(ITEM_FLATOWNERNAME));
+                                            map.put(ITEM_FLATOWNERCONTACT,jobj.isNull(ITEM_FLATOWNERCONTACT) ? "" : jobj.getString(ITEM_FLATOWNERCONTACT));
+                                            map.put(ITEM_FLATRENTERNAME,jobj.isNull(ITEM_FLATRENTERNAME) ? "" : jobj.getString(ITEM_FLATRENTERNAME));
+                                            map.put(ITEM_FLATRENTERCONTACT,jobj.isNull(ITEM_FLATRENTERCONTACT) ? "" : jobj.getString(ITEM_FLATRENTERCONTACT));
+                                            map.put(ITEM_AMTPAID, jobj.isNull(ITEM_AMTPAID) ? "0" : jobj.getString(ITEM_AMTPAID));
+                                            map.put(ITEM_ENTRYDATE, jobj.isNull(ITEM_ENTRYDATE) ? "" : jobj.getString(ITEM_ENTRYDATE));
+                                            map.put(ITEM_DTL_ID, String.valueOf(jobj.isNull(ITEM_DTL_ID) ? 0 : jobj.getString(ITEM_DTL_ID))); //dlt_id may come null value
+
+                                            model_detail.setSrno(i + 1);
+                                            model_detail.setflatnumber(jobj.getString(ITEM_FLATNO));
+                                            model_detail.setflattype(jobj.getString(ITEM_FLATTYPE));
+                                            model_detail.setownername(jobj.isNull(ITEM_FLATOWNERNAME) ? "" : jobj.getString(ITEM_FLATOWNERNAME));
+                                            model_detail.setOwnercontact(jobj.isNull(ITEM_FLATOWNERCONTACT) ? "" : jobj.getString(ITEM_FLATOWNERCONTACT));
+                                            model_detail.setRentername(jobj.isNull(ITEM_FLATRENTERNAME) ? "" : jobj.getString(ITEM_FLATRENTERNAME));
+                                            model_detail.setRentercontact(jobj.isNull(ITEM_FLATRENTERCONTACT) ? "" : jobj.getString(ITEM_FLATRENTERCONTACT));
+                                            model_detail.setPaidAmount(jobj.isNull(ITEM_AMTPAID) ? "0" : jobj.getString(ITEM_AMTPAID));
+                                            model_detail.setPaidEntrydt(jobj.isNull(ITEM_ENTRYDATE) ? "" : jobj.getString(ITEM_ENTRYDATE));
+                                            model_detail.setdtlid(jobj.isNull(ITEM_DTL_ID) ? 0 : jobj.getInt(ITEM_DTL_ID));
+
+                                            objModelMaintainancedetail.add(model_detail);
+                                            fillMaps.add(map);
+                                        } // for loop ends
+
+                                        PD.dismiss();
+                                        //showDialogWithMsg("Done......",objModelMaintainancedetail);
+                                        objMaintainanceAdapter.notifyDataSetChanged();
+                                    } // if ends
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        PD.dismiss();
+                        Toast.makeText(mContext,
+                                "failed to retrive infomations please check your network connection...", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("mth",hashmapMonthYear.get("MONTH"));
+                        params.put("yr",hashmapMonthYear.get("YEAR"));
+                        return params;
+                    }
+                };
+                // Adding request to request queue
+                AppController.getInstance().addToRequestQueue(postRequest);
+            }
+            catch (Exception Ex) {
+                Toast.makeText(getContext(), Ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+
+        private void ReadDataFromDBOLD(final ArrayList<modelMaintainancedetail> objModelMaintainancedetail ) {
             try {
             PD.show();
             JsonObjectRequest jreq = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -283,6 +365,7 @@ public class CustomDialog extends Dialog{
                                         map.put(ITEM_FLATRENTERNAME,jobj.isNull(ITEM_FLATRENTERNAME) ? "" : jobj.getString(ITEM_FLATRENTERNAME));
                                         map.put(ITEM_FLATRENTERCONTACT,jobj.isNull(ITEM_FLATRENTERCONTACT) ? "" : jobj.getString(ITEM_FLATRENTERCONTACT));
                                         map.put(ITEM_AMTPAID, jobj.isNull(ITEM_AMTPAID) ? "0" : jobj.getString(ITEM_AMTPAID));
+                                        map.put(ITEM_ENTRYDATE, jobj.isNull(ITEM_ENTRYDATE) ? "0" : jobj.getString(ITEM_ENTRYDATE));
                                         map.put(ITEM_DTL_ID, String.valueOf(jobj.isNull(ITEM_DTL_ID) ? 0 : jobj.getString(ITEM_DTL_ID))); //dlt_id may come null value
 
                                         model_detail.setSrno(i + 1);
@@ -293,6 +376,7 @@ public class CustomDialog extends Dialog{
                                         model_detail.setRentername(jobj.isNull(ITEM_FLATRENTERNAME) ? "" : jobj.getString(ITEM_FLATRENTERNAME));
                                         model_detail.setRentercontact(jobj.isNull(ITEM_FLATRENTERCONTACT) ? "" : jobj.getString(ITEM_FLATRENTERCONTACT));
                                         model_detail.setPaidAmount(jobj.isNull(ITEM_AMTPAID) ? "0" : jobj.getString(ITEM_AMTPAID));
+                                        model_detail.setPaidEntrydt(jobj.isNull(ITEM_ENTRYDATE) ? "0" : jobj.getString(ITEM_ENTRYDATE));
                                         model_detail.setdtlid(jobj.isNull(ITEM_DTL_ID) ? 0 : jobj.getInt (ITEM_DTL_ID));
 
                                         objModelMaintainancedetail.add(model_detail);

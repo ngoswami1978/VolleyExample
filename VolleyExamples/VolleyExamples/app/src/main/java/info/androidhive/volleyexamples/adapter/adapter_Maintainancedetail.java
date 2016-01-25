@@ -61,6 +61,7 @@ public class adapter_Maintainancedetail extends BaseAdapter implements View.OnCl
             holder.Rentername= (TextView) convertView.findViewById(R.id.mta_FlatRenterName);
             holder.Rentercontact= (TextView) convertView.findViewById(R.id.mta_FlatRenterContact);
             holder.PaidAmount= (TextView) convertView.findViewById(R.id.mta_AmtPaid);
+            holder.PaidEntrydt= (TextView) convertView.findViewById(R.id.mta_paiddatetime);
 
             convertView.setTag(holder);
         } else {
@@ -76,6 +77,7 @@ public class adapter_Maintainancedetail extends BaseAdapter implements View.OnCl
         holder.Rentername.setText(listData.get(position).getrentername());
         holder.Rentercontact.setText(listData.get(position).getRentercontact());
         holder.PaidAmount.setText(listData.get(position).getPaidAmount());
+        holder.PaidEntrydt.setText(listData.get(position).getPaidEntrydt());
 
         convertView.setOnClickListener(new OnItemClickListener(position));
 
@@ -115,5 +117,7 @@ public class adapter_Maintainancedetail extends BaseAdapter implements View.OnCl
         TextView Rentername;
         TextView Rentercontact;
         TextView PaidAmount;
+        TextView PaidEntrydt;
+
     }
 }
