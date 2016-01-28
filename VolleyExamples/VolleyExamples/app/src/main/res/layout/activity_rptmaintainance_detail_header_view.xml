@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="15dp"
     android:background="@android:color/transparent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:paddingTop="15dp"
+        android:background="@color/reportheadercolor"
         android:orientation="vertical">
 
         <TextView
@@ -19,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:textSize="@dimen/feed_item_timestamp"
             android:paddingLeft="0sp"
             android:textStyle="bold"
@@ -31,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:layout_toRightOf="@id/header_Id"
             android:textSize="@dimen/feed_item_timestamp"
             android:paddingLeft="10sp"
@@ -44,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/header_FlatNo"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:paddingLeft="10sp"
             android:text="FlatType"
             android:textStyle="bold"
@@ -56,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/header_FlatType"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:paddingLeft="10sp"
             android:text="Owner"
             android:textSize="@dimen/feed_item_timestamp"
@@ -68,8 +71,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_FlatOwner"
             android:paddingLeft="80sp"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:text="Name"
+            android:textStyle="bold"
             android:textSize="@dimen/feed_item_timestamp"/>
 
         <TextView
@@ -78,8 +82,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_FlatOwner"
             android:paddingLeft="120sp"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:text="Contact"
+            android:textStyle="bold"
             android:textSize="@dimen/feed_item_timestamp"/>
 
         <TextView
@@ -88,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/header_FlatOwner"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:paddingLeft="70sp"
             android:text="Renter"
             android:textSize="@dimen/feed_item_timestamp"
@@ -100,8 +105,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_FlatRenter"
             android:paddingLeft="180sp"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:text="Name"
+            android:textStyle="bold"
             android:textSize="@dimen/feed_item_timestamp"/>
 
         <TextView
@@ -110,15 +116,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_FlatRenter"
             android:paddingLeft="220sp"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:text="Contact"
+            android:textStyle="bold"
             android:textSize="@dimen/feed_item_timestamp"/>
 
         <TextView
             android:id="@+id/header_AmtPaid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:paddingLeft="280sp"
             android:text="Amount"
             android:textStyle="bold"
@@ -128,14 +135,12 @@
             android:id="@+id/header_dtl_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/reportheadercolor"
+            android:textColor="@color/reportheadercolorwhite"
             android:paddingLeft="350sp"
             android:text="Id"
             android:visibility="invisible"
             android:textStyle="bold"
             android:textSize="@dimen/feed_item_timestamp"/>
-
-
 
 
         <TextView

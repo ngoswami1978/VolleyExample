@@ -16,15 +16,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import info.androidhive.volleyexamples.CustomDialog;
+import java.text.DateFormatSymbols;
+
+import info.androidhive.volleyexamples.CustomDialogMaintainance;
 
 import info.androidhive.volleyexamples.R;
 
 public class MainActivity extends AppCompatActivity {
     private Context mContext;
 
-    private CustomDialog dialog ;
-    private String fareRules;
+    private CustomDialogMaintainance dialog ;
     private String strMonth;
     private String strYear;
     private static Activity myContext;
@@ -35,15 +36,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quickactiondialogactivity_main);
 
-//      dialog  = new CustomDialog(this);
+//      dialog  = new CustomDialogMaintainance(this);
         mContext=this;
         myContext=MainActivity.this;
 
         final View buttonShow = findViewById(R.id.btnShow);
         final View buttonShow1 = findViewById(R.id.btnNavigation);
         final View buttonShow2 = findViewById(R.id.btnNavigation1);
-        fareRules="SEP 2015";
-
 
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         private static int intMonth;
         private static int intYear;
         private static Activity myContext;
-        CustomDialog dialog;
+        CustomDialogMaintainance dialog;
 
         public MySampleDialogFragment(){
             super();
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected int getLayout() {
-            return R.layout.dialog_sample_view;
+            return R.layout.quickactiondialog_view;
         }
 
         @Override
@@ -180,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     try {
-                        Toast.makeText(getContext(), "Button inside Dialog!! - " + String.valueOf(intMonth) + " - " + String.valueOf(intYear), Toast.LENGTH_SHORT).show();
-                        dialog = new CustomDialog(myContext, String.valueOf(intMonth), String.valueOf(intYear));
+                        Toast.makeText(getContext(), "generating report keep patience!! - " + getMonth(intMonth) + " - " + String.valueOf(intYear), Toast.LENGTH_SHORT).show();
+                        dialog = new CustomDialogMaintainance(myContext, String.valueOf(intMonth), String.valueOf(intYear));
 
 //                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 //                        dialog.show();
@@ -196,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     try {
 //                        Toast.makeText(getContext(), "Button inside Dialog!! - " + String.valueOf(intMonth) + " - " + String.valueOf(intYear), Toast.LENGTH_SHORT).show();
-//                        dialog = new CustomDialog(myContext, String.valueOf(intMonth), String.valueOf(intYear));
+//                        dialog = new CustomDialogMaintainance(myContext, String.valueOf(intMonth), String.valueOf(intYear));
 
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                         dialog.show();
@@ -211,5 +210,10 @@ public class MainActivity extends AppCompatActivity {
 
             return view;
         }
+
+        public String getMonth(int month) {
+            return new DateFormatSymbols().getMonths()[month-1];
+        }
+
     }
 }

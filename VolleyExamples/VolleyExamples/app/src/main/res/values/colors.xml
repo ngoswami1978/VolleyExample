@@ -8,6 +8,8 @@
     <color name="timestamp">#a0a3a7</color>
     <color name="reportrowcolor">#a0a3a7</color>
     <color name="reportheadercolor">#0a80d1</color>
+    <color name="reportheadercolorwhite">#ffffff</color>
+
     <color name="bubble_dark_background">#B2191919</color>
     <color name="red">#b30000</color>
     <color name="FloatingActionButtonColor">#FF1493</color>

@@ -101,7 +101,7 @@ public class adapter_Maintainancedetail extends BaseAdapter implements View.OnCl
         @Override
         public void onClick(View arg0) {
             // Call when click on row rptmaintainancedetail
-//            CustomDialog sct = (CustomDialog) dialog;
+//            CustomDialogMaintainance sct = (CustomDialogMaintainance) dialog;
 //            /****  Call  onItemClick Method inside CustomListViewAndroidExample Class ( See Below )****/
 //            sct.onItemClick(mPosition);
         }
