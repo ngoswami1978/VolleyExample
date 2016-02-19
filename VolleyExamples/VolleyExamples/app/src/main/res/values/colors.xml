@@ -6,6 +6,7 @@
     <color name="feed_item_border">#c2c3c8</color>
     <color name="link">#0a80d1</color>
     <color name="timestamp">#a0a3a7</color>
+	
     <color name="reportrowcolor">#a0a3a7</color>
     <color name="reportheadercolor">#0a80d1</color>
     <color name="reportheadercolorwhite">#ffffff</color>
@@ -25,5 +26,12 @@
 
     <!--<color name="list_row_hover_start_color">#ebeef0</color>-->
     <!--<color name="list_row_hover_end_color">#ebeef0</color>-->
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="material_login_login_color">#FFFFFF</color>
+    <color name="material_login_register_color">#FF4081</color>
+    <color name="material_login_login_error_color">#ff5151</color>
+    <color name="material_login_register_error_color">#ffcdce</color>
+    <color name="material_login_login_text_color">#000</color>
+    <color name="material_login_register_text_color">#000</color>
 
 </resources>

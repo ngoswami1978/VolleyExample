@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "info.androidhive.volleyexamples"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -19,10 +19,19 @@ android {
     }
 }
 
+buildscript {
+    ext.buildTools = '23.0.1'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'com.android.support:design:23.0.1'
     compile files('libs/com-mcxiaoke-volley.jar')
+
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support:cardview-v7:$buildTools"
+    compile "com.android.support:design:$buildTools"
+    compile project(':circualreveal')
 }
+

@@ -13,4 +13,36 @@
     <string name="btn_json_array_request">Json Array Request</string>
 
     <string name="reportheader"><u><b><i>PERIOD SEP 2015</i></b></u></string>
+
+    <string name="login">LOGIN</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="go">GO</string>
+    <string name="register">REGISTER</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="next">NEXT</string>
+
+    <string name="Flat_prompt">Choose a Flat</string>
+    <string-array name="Flats_array">
+        <item>G1,1BHK</item>
+        <item>G2,1BHK</item>
+        <item>UG1,2BHK</item>
+        <item>UG2,1BHK</item>
+        <item>UG3,1BHK</item>
+        <item>UG4,2BHK</item>
+        <item>F1,2BHK</item>
+        <item>F2,1BHK</item>
+        <item>F3,1BHK</item>
+        <item>F4,2BHK</item>
+        <item>S1,2BHK</item>
+        <item>S2,1BHK</item>
+        <item>S3,1BHK</item>
+        <item>S4,2BHK</item>
+        <item>T1,2BHK</item>
+        <item>T2,1BHK</item>
+        <item>T3,1BHK</item>
+        <item>T4,2BHK</item>
+        <item>Top,2BHK</item>
+    </string-array>
+
 </resources>

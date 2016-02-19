@@ -6,6 +6,7 @@ package info.androidhive.volleyexamples.QuickActionDialogFragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,43 @@ public class MainActivity extends AppCompatActivity {
         final View buttonShow = findViewById(R.id.btnShow);
         final View buttonShow1 = findViewById(R.id.btnNavigation);
         final View buttonShow2 = findViewById(R.id.btnNavigation1);
+
+        TextView msgResponse1 = (TextView) findViewById(R.id.msgResponse1);
+        TextView msgResponse2 = (TextView) findViewById(R.id.msgResponse2);
+        TextView msgResponse3 = (TextView) findViewById(R.id.msgResponse3);
+        TextView msgResponse4 = (TextView) findViewById(R.id.msgResponse4);
+
+
+
+        // Font path
+        String fontPath = "fonts/gtw.ttf";
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+        // Applying font
+        msgResponse1.setTypeface(tf);
+
+        // Font path
+        fontPath = "fonts/Oswald-Stencbab.ttf";
+        // Loading Font Face
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        // Applying font
+        msgResponse2.setTypeface(tf);
+
+        // Font path
+        fontPath = "fonts/Roboto-Bold.ttf";
+        // Loading Font Face
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        // Applying font
+        msgResponse3.setTypeface(tf);
+
+        // Font path
+        fontPath = "fonts/Roboto-ThinItalic.ttf";
+        // Loading Font Face
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        // Applying font
+        msgResponse4.setTypeface(tf);
+
+
 
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override

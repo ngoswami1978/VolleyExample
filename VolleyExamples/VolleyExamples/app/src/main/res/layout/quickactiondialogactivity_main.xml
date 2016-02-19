@@ -5,6 +5,38 @@
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray">
 
+    <TextView
+        android:id="@+id/msgResponse1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="38dp"
+        android:layout_marginTop="50dp"
+        android:text="My Custom Font" />
+
+    <TextView
+        android:id="@+id/msgResponse2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="38dp"
+        android:layout_marginTop="100dp"
+        android:text="My Custom Font" />
+
+    <TextView
+        android:id="@+id/msgResponse3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="38dp"
+        android:layout_marginTop="150dp"
+        android:text="My Custom Font" />
+
+    <TextView
+        android:id="@+id/msgResponse4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="38dp"
+        android:layout_marginTop="200dp"
+        android:text="My Custom Font" />
+
     <Button
         android:id="@+id/btnShow"
         android:layout_width="wrap_content"
